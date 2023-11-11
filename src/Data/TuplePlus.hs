@@ -1,5 +1,20 @@
+{-# LANGUAGE UnicodeSyntax #-}
+
+{- | additional tools for working with tuples -}
+
+
+module Data.TuplePlus
+  ( TupleAppend(tupleAppend, (⨦))
+  , TuplePrepend(tuplePrepend, (⨤))
+  , tupleToList
+  ) where
+
+--------------------------------------------------------------------------------
+
+{- | Tuples of all the same type (a.k.a, lists of specific lengths) -}
 class HomogenousTuple α where
   type family TupleItem α
+  {-| convert to a list -}
   tupleToList ∷ α → [TupleItem α]
 
 instance HomogenousTuple (α,α) where
@@ -24,9 +39,12 @@ instance HomogenousTuple (α,α,α,α,α,α) where
 
 ------------------------------------------------------------
 
+{- | tuples that may be prepended to with (⨤) -}
 class TuplePrepend α β γ where
   type family TuplePrepended α β
+  {-| prepend to a tuple -}
   tuplePrepend ∷ α → β → γ
+  {-| unicode symbol for `tuplePrepend` -}
   (⨤) ∷ α → β → γ
   (⨤) = tuplePrepend
 
@@ -40,9 +58,12 @@ instance ∀ α β γ δ . TuplePrepend α (β,γ,δ) (α,β,γ,δ) where
 
 ------------------------------------------------------------
 
+{- | tuples that may be appended to with (⨦) -}
 class TupleAppend α β γ where
   type family TupleAppended α β
+  {-| append to a tuple -}
   tupleAppend ∷ α → β → γ
+  {-| unicode symbol for `tupleAppend` -}
   (⨦) ∷ α → β → γ
   (⨦) = tupleAppend
 
@@ -62,3 +83,4 @@ instance ∀ α β γ δ κ ι . TupleAppend (α,β,γ,δ,κ) ι (α,β,γ,δ,κ
   type instance TupleAppended (α,β,γ,δ,κ) ι = (α,β,γ,δ,κ,ι)
   tupleAppend (α,β,γ,δ,κ) ι = (α,β,γ,δ,κ,ι)
 
+-- that's all, folks! ----------------------------------------------------------

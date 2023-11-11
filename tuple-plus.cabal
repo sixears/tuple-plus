@@ -10,7 +10,7 @@ name:                tuple-plus
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.0.0.0
+version:             0.0.1.0
 
 -- A short (one-line) description of the package.
 synopsis:            output text in aligned columns
@@ -50,9 +50,11 @@ library
   ghc-options:      -W -Wall -fhelpful-errors
   default-extensions: DeriveGeneric
                     , FlexibleContexts
+                    , FlexibleInstances
                     , GeneralizedNewtypeDeriving
                     , ImportQualifiedPost
                     , LambdaCase
+                    , MultiParamTypeClasses
                     , NoImplicitPrelude
                     , OverloadedStrings
                     , QuasiQuotes
@@ -74,7 +76,7 @@ library
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends: base
+  build-depends:
 
                -- , base0        >= 0.0.4.11
 
